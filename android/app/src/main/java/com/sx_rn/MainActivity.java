@@ -1,4 +1,4 @@
-package com.sx_app_react_native;
+package com.sx_rn;
 
 import com.facebook.react.ReactActivity;
 
@@ -10,6 +10,6 @@ public class MainActivity extends ReactActivity {
      */
     @Override
     protected String getMainComponentName() {
-        return "sx_app_react_native";
+        return "sx_rn";
     }
 }

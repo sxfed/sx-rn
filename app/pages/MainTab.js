@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import {TabNavigator} from 'react-navigation';
 
-import Home from './Home';
-import DemoPage from './Demos/Demo';
-import AboutPage from './About/About';
+import Home from './home/Home';
+import DemoPage from './demos/Demo';
+import AboutPage from './about/About';
 
 /**
  * 首页导航
@@ -13,4 +13,8 @@ export default TabNavigator({
 	Home: {screen: Home},
 	DemoPage: {screen: DemoPage},
 	AboutPage: {screen: AboutPage}
+}, {
+	navigationOptions: {
+		gesturesEnabled: false,
+	}
 });

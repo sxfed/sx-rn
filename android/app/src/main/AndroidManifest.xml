@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.sx_app_react_native"
+    package="com.sx_rn"
     android:versionCode="1"
     android:versionName="1.0">
 

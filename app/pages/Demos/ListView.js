@@ -1,50 +1,78 @@
-import React, {Component, PureComponent} from 'react';
+import React, {PureComponent} from 'react';
 import {View, Text, FlatList, TouchableOpacity} from 'react-native';
 import {Button, WhiteSpace} from 'antd-mobile';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import fetch from 'sx-fetch/src';
 
-export default class About extends Component {
+/* 每页显示条数 */
+const PAGE_SIZE = 20;
+
+@fetch.inject()
+export default class About extends PureComponent {
 	static navigationOptions = {
-		title: '长列表'
+		title: '长列表',
 	}
 
 	state = {
-		selected: (new Map(): Map<string, boolean>)
+		selected: (new Map(): Map<string, boolean>),
+		list: [],
+		refreshing: false,
+		pageNum: 1,
 	}
 
-	renderItem = ({item}) => (
-		<ListItem
-			handleOnPress={this.handleOnPress}
-		>
-			<Text key={item.key}>{item.title}</Text>
-		</ListItem>
-	)
-
-	handleOnPress = () => {
-
+	componentDidMount() {
+		this.getList(1);
 	}
 
-	render() {
-		console.log(this.state.selected);
+	renderItem = ({item}) => {
 		return (
-			<View
-				style={{flex: 1}}
-			>
-				<FlatList>
-
-				</FlatList>
+			<View>
+				<Text>id：{item.id}</Text>
+				<Text>name：{item.name}</Text>
+				<Text>address：{item.address}</Text>
 			</View>
 		);
 	}
-}
 
-class ListItem extends PureComponent {
+	getList = pageNum => {
+		const {$fetch} = this.props;
+		const {list} = this.state;
+
+		this.setState({refreshing: true});
+		$fetch.get('/mock/list', {
+			pageSize: PAGE_SIZE,
+			pageNum: 2
+		}).then(({list: dataList}) => {
+			this.setState({
+				list: pageNum === 1 ? dataList : list.concat(dataList)
+			});
+		}).finally(() => {
+			this.setState({refreshing: false});
+		});
+	}
+
+	onRefresh = () => {
+		this.getList(1);
+	}
+
+	onEndReached = () => {
+		console.log(12342523423423353);
+	}
+
 	render() {
+		const { list, refreshing } = this.state;
+
 		return (
-			<TouchableOpacity
-				{...this.props}
-				onPress={this.props.handleOnPress}>
-			</TouchableOpacity>
+			<View style={{flex: 1}}>
+				<FlatList
+					data={list}
+					renderItem={this.renderItem}
+					onRefresh={this.onRefresh}
+					refreshing={refreshing}
+					onEndReachedThreshold={5}
+					onEndReached={this.onEndReached}
+				/>
+			</View>
 		);
 	}
 }

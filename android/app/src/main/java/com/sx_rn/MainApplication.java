@@ -1,4 +1,4 @@
-package com.sx_app_react_native;
+package com.sx_rn;
 
 import android.app.Application;
 

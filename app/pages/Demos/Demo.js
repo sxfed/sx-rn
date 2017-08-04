@@ -4,14 +4,14 @@ import {List, WhiteSpace} from 'antd-mobile';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import demoList from '../../config/demos';
+import {getIcon} from '../../config/icon.conf';
 
 export default class Demo extends Component {
 	static navigationOptions = {
 		title: 'Demo',
 		tabBarLabel: 'Demo',
 		tabBarIcon: ({focused, tintColor}) => {
-			let iconName = focused ? 'ios-apps' : 'ios-apps-outline';
-			return <Ionicons name={iconName} size={26} color={tintColor}/>
+			return <Ionicons name={getIcon('demo', focused)} size={26} color={tintColor}/>
 		}
 	}
 
