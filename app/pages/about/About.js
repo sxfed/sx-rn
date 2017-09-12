@@ -5,6 +5,7 @@ import {Button} from 'antd-mobile';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import {getIcon} from '../../config/icon.conf';
+import NavigationUtil from '../../utils/NavigationUtil';
 
 export default class About extends Component {
 	static navigationOptions = {
@@ -16,14 +17,7 @@ export default class About extends Component {
 	}
 
 	handleLogOutClick = () => {
-		const {navigation} = this.props;
-
-		navigation.dispatch(NavigationActions.reset({
-			index: 0,
-			actions: [
-				NavigationActions.navigate({routeName: 'Login'})
-			]
-		}));
+		NavigationUtil.reset(this.props.navigation, 'Login');
 	}
 
 	render() {

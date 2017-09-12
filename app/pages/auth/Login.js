@@ -3,6 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 import { Button, WhiteSpace, InputItem, WingBlank, List } from 'antd-mobile';
 
+import NavigationUtil from '../../utils/NavigationUtil';
 
 export default class Login extends Component {
 	static navigationOptions = {
@@ -10,14 +11,7 @@ export default class Login extends Component {
 	}
 
 	handleLoginClick = () => {
-		const {navigation} = this.props;
-
-		navigation.dispatch(NavigationActions.reset({
-			index: 0,
-			actions: [
-				NavigationActions.navigate({routeName: 'Tab'})
-			]
-		}));
+		NavigationUtil.reset(this.props.navigation, 'Tab');
 	}
 
 	render() {

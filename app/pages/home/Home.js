@@ -1,9 +1,10 @@
-import React, {Component} from 'react';
-import {View, Text, Image, StyleSheet} from 'react-native';
+import React, { Component } from 'react';
+import { View, Text, Image, StyleSheet } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
-import {getIcon} from '../../config/icon.conf';
+import { getIcon } from '../../config/icon.conf';
+import { px } from '../../utils/ScreenUtil';
 
 @connect(({userInfo}) => ({userInfo}))
 export default class Home extends Component {
@@ -19,7 +20,7 @@ export default class Home extends Component {
 		return (
 			<View>
 				<Image source={require('../../assets/images/logo.png')} style={styles.logo}/>
-				<Text style={styles.title}>sx-app-react-native v1.0</Text>
+				<Text style={styles.title}>sx-rn v1.2</Text>
 			</View>
 		);
 	}
@@ -27,14 +28,14 @@ export default class Home extends Component {
 
 const styles = StyleSheet.create({
 	logo: {
-		width: 120,
-		height: 120,
+		width: px(240),
+		height: px(240),
 		marginLeft: 'auto',
 		marginRight: 'auto',
 		marginTop: 100,
 	},
 	title: {
-		lineHeight: 40,
+		lineHeight: 20,
 		textAlign: 'center',
 		color: '#777'
 	}
